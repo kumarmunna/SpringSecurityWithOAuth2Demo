@@ -1,0 +1,34 @@
+  
+zuul:
+  host:
+   socket-timeout-millis: 10000
+  sensitiveHeaders: Cookie,Set-Cookie
+  prefix: /api/v1
+  routes:
+    auth-service:
+      path: /auth/**
+      service-id: auth-service
+    logic-service:
+      path: /logic/**
+      service-id: logic-service
+  add-proxy-headers: true
+  
+ribbon:
+  ConnectTimeout: 10000
+  ReadTimeout: 10000
+ 
+eureka:
+  server:
+    eviction-interval-timer-in-ms: 60 * 1000
+  instance:
+    leaseRenewalIntervalInSeconds: 30
+    leaseExpirationDurationInSeconds: 90
+  client:
+    registerWithEureka: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false 
